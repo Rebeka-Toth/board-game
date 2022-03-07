@@ -6,13 +6,12 @@ import board.FieldType;
 import java.util.ArrayList;
 
 public class MonsterArmy {
-
-    private Board board;
     private ArrayList<GameCharacter> army;
+    private Board board;
 
     public MonsterArmy(Board board) {
         this.board = board;
-        this.army = createArmy();
+        this.army = createMonsters();
     }
 
     public ArrayList<GameCharacter> getArmy() {
@@ -43,7 +42,7 @@ public class MonsterArmy {
         return new Monster(healthPoint, attackPoint, new Position(level, field), initial);
     }
 
-    public ArrayList<GameCharacter> createArmy() {
+    public ArrayList<GameCharacter> createMonsters() {
         Level[] levels = this.board.getBoard();
         ArrayList<GameCharacter> monsters = new ArrayList<>();
 
@@ -54,9 +53,9 @@ public class MonsterArmy {
                 char initial = levels[i].getField(j).getInitial();
 
                 if (fieldType == FieldType.MONSTER) {
-                    monsters.add(createMonster(i, j, initial));
+                    monsters.add(this.createMonster(i, j, initial));
                 } else if (fieldType == FieldType.BOSS) {
-                    monsters.add(createBoss(i, j, initial));
+                    monsters.add(this.createBoss(i, j, initial));
                 }
             }
         }

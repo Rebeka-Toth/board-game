@@ -4,11 +4,12 @@ import helper.TestDiceRolls;
 
 public abstract class GameCharacter {
     private double healthPoint;
-    private double attackPoint;
-    private Position position;
-    private char initial;
+    private final double attackPoint;
+    private final Position position;
+    private final char initial;
 
-    public GameCharacter(double healthPoint, double attackPoint, Position position, char initial) {
+    public GameCharacter(final double healthPoint, final double attackPoint, final Position position,
+            final char initial) {
         this.healthPoint = healthPoint;
         this.attackPoint = attackPoint;
         this.position = position;
@@ -19,7 +20,7 @@ public abstract class GameCharacter {
         return this.healthPoint;
     }
 
-    public void setHealthPoint(double healthPoint) {
+    public void setHealthPoint(final double healthPoint) {
         this.healthPoint = healthPoint;
     }
 
@@ -40,16 +41,10 @@ public abstract class GameCharacter {
                 + (this.healthPoint < 0 ? "0" : this.healthPoint) + ", p: " + this.position.getPositionString() + " }");
     }
 
-    public void fight(GameCharacter GameCharacter) {
-        try {
-            Thread.sleep(1000); // 1000 milliseconds is one second.
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-        double damage = this.attack();
-        TestDiceRolls.counter = 0;
+    public void fight(final GameCharacter GameCharacter) {
+        final double damage = this.attack();
         System.out.println(this.initial + " attack:  " + damage);
-        double newHeroHealth = GameCharacter.getHealthPoint() - damage;
+        final double newHeroHealth = GameCharacter.getHealthPoint() - damage;
         GameCharacter.setHealthPoint(newHeroHealth);
         GameCharacter.printGameCharacter();
         if (GameCharacter.getHealthPoint() <= 0) {

@@ -1,6 +1,8 @@
 package character;
 
-import helper.TestDiceRolls;
+import helper.RandomDiceRoll;
+import board.Field;
+import board.FieldType;
 
 public class Hero extends GameCharacter {
 
@@ -25,7 +27,7 @@ public class Hero extends GameCharacter {
 
     @Override
     public double attack() {
-        int currentDiceRoll = TestDiceRolls.getDiceRoll();
+        int currentDiceRoll = RandomDiceRoll.roll();
 
         System.out.println(Hero.HERO_INITIAL + " rolled a(n) " + currentDiceRoll);
 
@@ -42,5 +44,9 @@ public class Hero extends GameCharacter {
         }
 
         return attackAmount;
+    }
+
+    public boolean isReadyToFight(Field field) {
+        return field.getFieldType() == FieldType.MONSTER || field.getFieldType() == FieldType.BOSS;
     }
 }

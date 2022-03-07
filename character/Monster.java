@@ -1,6 +1,6 @@
 package character;
 
-import helper.TestDiceRolls;
+import helper.RandomDiceRoll;
 
 public class Monster extends GameCharacter {
     public static final double BASE_MONSTER_ATTACK = 5.0;
@@ -26,7 +26,7 @@ public class Monster extends GameCharacter {
 
     @Override
     public double attack() {
-        int currentDiceRoll = TestDiceRolls.getDiceRoll();
+        int currentDiceRoll = RandomDiceRoll.roll();
 
         System.out.println(this.getInitial() + " rolled a(n) " + currentDiceRoll);
 
